@@ -19,7 +19,7 @@ module.exports = (function () {
     var sensitivity = 30;
 
     // Start watching the accelerometer for a shake gesture
-    shake.startWatch = function (onShake, _sensitivity, onError) {
+    shake.startWatch = function (onShake, _sensitivity, pollingFreqency, onError) {
         if (typeof (onShake) !== "function") {
             return;
         }
@@ -27,6 +27,11 @@ module.exports = (function () {
         if (typeof (_sensitivity) === "number") {
             sensitivity = _sensitivity;
         }
+
+        if (typeof (pollingFreqency) === "number") {
+            options.frequency = pollingFreqency;
+        }
+
 
         shakeCallBack = debounce(onShake);
 
